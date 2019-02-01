@@ -61,12 +61,12 @@ class TemperatureSensor:
     def diodes(self):
         GPIO.output(24, GPIO.LOW)
         GPIO.output(18, GPIO.LOW)
-        if self.temperatureC < 28:
+        if self.temperatureC < 15:
             print("Blue led On")
-            GPIO.output(24, GPIO.HIGH)
+            GPIO.output(18, GPIO.HIGH)
         elif self.temperatureC > 30:
             print("red led on")
-            GPIO.output(18, GPIO.HIGH)
+            GPIO.output(24, GPIO.HIGH)
         return
 
 
