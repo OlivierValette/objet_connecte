@@ -1,9 +1,9 @@
 body {
-	background-color: #413373;
-	padding: 20px;
-	overflow: hidden;
-    font-family: sans-serif;
-    color: #dad070;
+  background-color: #413373;
+  padding: 20px;
+  overflow: hidden;
+  font-family: sans-serif;
+  color: #dad070;
 }
 
 .thermometer {
@@ -31,16 +31,15 @@ body {
 }
 
 .ring .dial-bottom {
-position: relative;
-top: 125px;
-left: 50px;
-width: 110px;
-height: 110px;
-background-color: #EDEDED;
-border-radius: 0 0 0 95%;
-transform: rotate(-45deg);
+  position: relative;
+  top: 125px;
+  left: 50px;
+  width: 110px;
+  height: 110px;
+  background-color: #EDEDED;
+  border-radius: 0 0 0 95%;
+  transform: rotate(-45deg);
 }
-
 
 .pointer {
   position: absolute;

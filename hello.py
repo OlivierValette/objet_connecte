@@ -12,9 +12,15 @@ app = Flask(__name__)
 def hello_world():
     return render_template('hello.html')
 
+
+# Mouvement
+@app.route('/mouvement/')
+def detected():
+    print('Mouvement détecté')
+    return render_template('movement.html')
+
+
 # Temperature
-
-
 class TemperatureSensor:
 
     def __init__(self, code):

@@ -8,10 +8,12 @@
     <h1> Sonde de température </h1>
 	{% if tc < 15 %}
   		<h5>Il fait froid : {{ tc }}°C !</h5>
+                <img src="https://media.giphy.com/media/2noiRecKFWco/giphy.gif">
 	{% elif tc < 30 %}
   		<h5>Température agréable de : {{ tc }}°C !</h5>
 	{% else %}
-  		<h5>Il fait trop chaud : {{ tc }}°C !</h5>
+  		<h5 class="hot">Il fait trop chaud : {{ tc }}°C !</h5>
+		<img src="https://media.giphy.com/media/5PDpiNMsIEr4s/giphy.gif">
 	{% endif %}
 
     <div class="thermometer">
@@ -35,6 +37,5 @@
         </div>
       </div>
     </div>
-
 </body>
 </html>
