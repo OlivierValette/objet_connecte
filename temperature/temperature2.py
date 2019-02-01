@@ -1,6 +1,5 @@
 # Imports
 import os
-import glob
 import time
 
 # Initialisation des broches

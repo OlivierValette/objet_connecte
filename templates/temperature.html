@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sonde T°</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='styletemp.css')}}">
+</head>
+<body>
+    <h1> Sonde de température </h1>
+	{% if tc < 15 %}
+  		<h5>Il fait froid : {{ tc }}°C !</h5>
+	{% elif tc < 30 %}
+  		<h5>Température agréable de : {{ tc }}°C !</h5>
+	{% else %}
+  		<h5>Il fait trop chaud : {{ tc }}°C !</h5>
+	{% endif %}
+
+</body>
+</html>
