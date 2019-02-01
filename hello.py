@@ -12,12 +12,7 @@ app = Flask(__name__)
 def hello_world():
     return render_template('hello.html')
 
-
 # Temperature
-# Initialisation des broches
-def init_sonde():
-    os.system('modprobe w1-gpio')  # Allume le module 1wire
-    os.system('modprobe w1-therm')  # Allume le module Temperature
 
 
 class TemperatureSensor:
@@ -28,6 +23,12 @@ class TemperatureSensor:
         self.device_file = '/sys/bus/w1/devices/' + code + '/w1_slave'
         self.temperatureC = 0
         self.temperatureF = 0
+        # Initialisation des broches
+        os.system('modprobe w1-gpio')  # Allume le module 1wire
+        os.system('modprobe w1-therm')  # Allume le module Temperature
+        # Initialisation des leds
+        init_led(18)
+        init_led(24)
 
     # Méthode qui lit dans le fichier température
     def read_temp_raw(self):
@@ -57,14 +58,24 @@ class TemperatureSensor:
     def convertCtoF(self, tc):
         return tc * 9 / 5 + 32
 
+    def diodes(self):
+        GPIO.output(24, GPIO.LOW)
+        GPIO.output(18, GPIO.LOW)
+        if self.temperatureC < 28:
+            print("Blue led On")
+            GPIO.output(24, GPIO.HIGH)
+        elif self.temperatureC > 30:
+            print("red led on")
+            GPIO.output(18, GPIO.HIGH)
+        return
 
-# Routes
 
 @app.route('/temperature/')
 def getsensor():
     sonde = TemperatureSensor('28-0213121a4aaa')
     sonde.read_temp()
     print('Température de la sonde :', sonde.temperatureC, '°C -', sonde.temperatureF, '°F')
+    sonde.diodes()
     return render_template('temperature.html', tc=sonde.temperatureC, tf=sonde.temperatureF)
 
 

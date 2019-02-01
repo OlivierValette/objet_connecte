@@ -14,5 +14,27 @@
   		<h5>Il fait trop chaud : {{ tc }}°C !</h5>
 	{% endif %}
 
+    <div class="thermometer">
+      <div class="ring">
+        <div class="dial-bottom"></div>
+      </div>
+      <div class="temperatureContainer">
+        <div class="pointer central"></div>
+{#        <div class="pointer basking"></div>#}
+        <div class="title central">
+          °C
+        </div>
+        <div class="temperature central">
+          {{ tc }}<span class="degree">&deg;</span>
+        </div>
+        <div class="title basking">
+          °F
+        </div>
+        <div class="temperature basking">
+          {{ tf }}<span class="degree">&deg;</span>
+        </div>
+      </div>
+    </div>
+
 </body>
 </html>
