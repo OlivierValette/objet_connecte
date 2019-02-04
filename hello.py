@@ -5,6 +5,10 @@ import os
 import time
 import RPi.GPIO as GPIO
 
+# Broches des Leds
+LED1 = 18
+LED2 = 24
+
 app = Flask(__name__)
 
 
@@ -33,8 +37,8 @@ class TemperatureSensor:
         os.system('modprobe w1-gpio')  # Allume le module 1wire
         os.system('modprobe w1-therm')  # Allume le module Temperature
         # Initialisation des leds
-        init_led(18)
-        init_led(24)
+        init_led(LED1)
+        init_led(LED2)
 
     # Méthode qui lit dans le fichier température
     def read_temp_raw(self):
@@ -65,14 +69,14 @@ class TemperatureSensor:
         return tc * 9 / 5 + 32
 
     def diodes(self):
-        GPIO.output(24, GPIO.LOW)
-        GPIO.output(18, GPIO.LOW)
+        GPIO.output(LED1, GPIO.LOW)
+        GPIO.output(LED2, GPIO.LOW)
         if self.temperatureC < 15:
             print("Blue led On")
-            GPIO.output(18, GPIO.HIGH)
+            GPIO.output(LED1, GPIO.HIGH)
         elif self.temperatureC > 30:
             print("red led on")
-            GPIO.output(24, GPIO.HIGH)
+            GPIO.output(LED2, GPIO.HIGH)
         return
 
 
@@ -103,36 +107,36 @@ def leds():
 @app.route('/led/on/<int:broche>')
 def lightOn(broche=None):
     # Initialisation des leds
-    init_led(14)
-    init_led(15)
+    init_led(LED1)
+    init_led(LED2)
     # Si le numéro de broche n'est pas indiqué
     if broche == None:
         print("Leds On")
-        GPIO.output(14, GPIO.HIGH)
-        GPIO.output(15, GPIO.HIGH)
+        GPIO.output(LED1, GPIO.HIGH)
+        GPIO.output(LED2, GPIO.HIGH)
         return "leds on"
-    elif broche in [14, 15]:
+    elif broche in [LED1, LED2]:
         print("Led", broche, "on")
         GPIO.output(broche, GPIO.HIGH)
         return "led " + str(broche) + " on"
     else:
-        print("broche non affectee")
-        return "broche non affectee"
+        print("broche non affectée")
+        return "broche non affectée"
 
 
 @app.route('/led/off')
 @app.route('/led/off/<int:broche>')
 def lightOff(broche=None):
     # Initialisation des leds
-    init_led(14)
-    init_led(15)
+    init_led(LED1)
+    init_led(LED2)
     # Si le numéro de broche n'est pas indiqué
     if broche == None:
         print("Leds Off")
-        GPIO.output(14, GPIO.LOW)
-        GPIO.output(15, GPIO.LOW)
+        GPIO.output(LED1, GPIO.LOW)
+        GPIO.output(LED2, GPIO.LOW)
         return "leds off"
-    elif broche in [14, 15]:
+    elif broche in [LED1, LED2]:
         print("Led", broche, "off")
         GPIO.output(broche, GPIO.LOW)
         return "led " + str(broche) + " off"
